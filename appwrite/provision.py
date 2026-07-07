@@ -17,7 +17,9 @@ EP = os.environ["APPWRITE_ENDPOINT"].rstrip("/")
 PROJECT = os.environ["APPWRITE_PROJECT_ID"]
 KEY = os.environ["APPWRITE_API_KEY"]
 DB = "browse"
-SEED = os.environ.get("SEED_JSON", "/agent/workspace/extract/data.json")
+SEED = os.environ.get(
+    "SEED_JSON", os.path.join(os.path.dirname(os.path.abspath(__file__)), "seed-sites.json")
+)
 
 
 def api(method, path, body=None):
@@ -132,11 +134,11 @@ for i, s in enumerate(sites):
         "data": {
             "slug": s["slug"],
             "name": s["name"],
-            "category_slug": s["categorySlug"],
-            "category_label": s["categoryLabel"],
+            "category_slug": s["category_slug"],
+            "category_label": s["category_label"],
             "url": s["url"],
-            "thumb": "/thumbs/" + s["thumb"],
-            "sort": i,
+            "thumb": s["thumb"],
+            "sort": s.get("sort", i),
         },
     }
     st, js = api("POST", f"/databases/{DB}/collections/sites/documents", body)

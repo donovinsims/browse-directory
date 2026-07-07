@@ -12,7 +12,7 @@ export const posts: BlogPost[] = [
     date: 'Sep 7, 2023',
     excerpt:
       'Client work is only one way to earn from design. Turning your skills into products — assets, courses, and services with fixed scope — builds income that compounds.',
-    cover: '/blog/productize-your-design-skills.jpg',
+    cover: 'https://nyc.cloud.appwrite.io/v1/storage/buckets/assets/files/blog-45a7a896/view?project=6a4d7c0c000bbac87d8b',
     blocks: [
       {
         type: 'p',
@@ -64,7 +64,7 @@ export const posts: BlogPost[] = [
     date: 'Sep 25, 2023',
     excerpt:
       'Freelancing promises freedom and delivers responsibility. A clear-eyed look at what gets better, what gets harder, and how to start without burning your savings.',
-    cover: '/blog/freelancing-in-digital-design.jpg',
+    cover: 'https://nyc.cloud.appwrite.io/v1/storage/buckets/assets/files/blog-16cab409/view?project=6a4d7c0c000bbac87d8b',
     blocks: [
       {
         type: 'p',
@@ -110,7 +110,7 @@ export const posts: BlogPost[] = [
     date: 'Sep 18, 2023',
     excerpt:
       'Shares are a design outcome, not luck. What makes people pass work along — and how to build thumbnails, previews, and layouts that travel well.',
-    cover: '/blog/designing-for-shareability-on-social-media.jpg',
+    cover: 'https://nyc.cloud.appwrite.io/v1/storage/buckets/assets/files/blog-dbeead6d/view?project=6a4d7c0c000bbac87d8b',
     blocks: [
       {
         type: 'p',
@@ -152,7 +152,7 @@ export const posts: BlogPost[] = [
     date: 'Sep 21, 2023',
     excerpt:
       'Platforms removed the gatekeepers between creative people and their audiences. What the creator economy changes for designers — and where its sharp edges are.',
-    cover: '/blog/how-digital-platforms-are-powering-a-new-era-of-entrepreneurship.jpg',
+    cover: 'https://nyc.cloud.appwrite.io/v1/storage/buckets/assets/files/blog-db4373bb/view?project=6a4d7c0c000bbac87d8b',
     blocks: [
       {
         type: 'p',
@@ -195,7 +195,7 @@ export const posts: BlogPost[] = [
     date: 'Aug 28, 2023',
     excerpt:
       'Screens stopped being rectangles you look at and became spaces you inhabit. How mobile, VR, and wearables each rewrite the rules of screen design.',
-    cover: '/blog/screen-design-in-the-age-of-mobile-and-vr.jpg',
+    cover: 'https://nyc.cloud.appwrite.io/v1/storage/buckets/assets/files/blog-50e1fef5/view?project=6a4d7c0c000bbac87d8b',
     blocks: [
       {
         type: 'p',
@@ -237,7 +237,7 @@ export const posts: BlogPost[] = [
     date: 'Aug 17, 2023',
     excerpt:
       'From counting pixels in bitmap grids to orchestrating end-to-end experiences — a short history of how digital design kept redefining its own job.',
-    cover: '/blog/the-evolution-of-digital-design-from-pixels-to-experience.jpg',
+    cover: 'https://nyc.cloud.appwrite.io/v1/storage/buckets/assets/files/blog-61a6774a/view?project=6a4d7c0c000bbac87d8b',
     blocks: [
       {
         type: 'p',

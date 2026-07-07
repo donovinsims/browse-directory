@@ -6,9 +6,9 @@ bookmarks, submissions, and email capture. Faithful to the extracted design syst
 color tokens, OS-driven dark mode, Inter 400/500/600, hairline-ring elevation, accent reserved
 for conversion CTAs (and the saved-bookmark state).
 
-> **Demo content notice** — the catalog rows in `src/data/sites.ts`, the thumbnails in
-> `public/thumbs/`, and the blog posts are placeholders carried over from the template.
-> Replace them with your own content (see below). Screenshots are copyrighted by their
+> **Demo content notice** — the catalog rows in `src/data/sites.ts`, their thumbnails (served
+> from an Appwrite Storage bucket), and the blog posts are placeholders carried over from the
+> template. Replace them with your own content (see below). Screenshots are copyrighted by their
 > respective owners.
 
 ## Quick start
@@ -78,11 +78,23 @@ The $8/mo Bookmarking tier's checkout is stubbed on purpose:
 
 ## Replace the demo content
 
-- **Cards**: edit `src/data/sites.ts` (slug, name, category, url, thumb) and drop ≈4:3 thumbnails
-  into `public/thumbs/`. With Appwrite connected, re-run `appwrite/provision.py` (or edit the
-  `sites` collection) — DB rows win over the local seed.
+- **Images live in Appwrite Storage** (public `assets` bucket), not the repo. Upload new ones with
+  `appwrite/upload_storage.py` (see below); each file's public URL is
+  `…/storage/buckets/assets/files/<fileId>/view?project=<projectId>`.
+- **Cards**: edit `src/data/sites.ts` (slug, name, category, url, thumb) — set `thumb` to the
+  Storage URL of the uploaded image. With Appwrite connected, re-run `appwrite/provision.py` (reads
+  `appwrite/seed-sites.json`) or edit the `sites` collection — DB rows win over the local seed.
 - **Categories**: `src/data/categories.ts` (pill order = array order).
-- **Blog**: `src/data/blog.ts` + covers in `public/blog/`.
+- **Blog**: `src/data/blog.ts` (each `cover` is a Storage URL).
+
+### Migrate images to Storage
+
+`appwrite/upload_storage.py` creates the public `assets` bucket and uploads images, printing a
+URL map. It's the one-time migration used for the demo assets:
+
+```bash
+APPWRITE_ENDPOINT=… APPWRITE_PROJECT_ID=… APPWRITE_API_KEY=… python3 appwrite/upload_storage.py
+```
 
 ## Design system
 
