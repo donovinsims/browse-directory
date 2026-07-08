@@ -67,6 +67,17 @@ each user's bookmarks private; submissions/subscribers are create-only from the 
 | `subscribers` | email (unique) | create: any |
 | `bookmarks` | userId, siteSlug | create: users; per-document read/update/delete by owner |
 
+## Admin (review submissions)
+
+`/admin` is a Teams-gated dashboard to triage the `submissions` collection (approve / reject /
+delete, filter by status). Access is granted to members of the Appwrite **`admins` team** — the
+`submissions` collection grants that team `read`/`update`/`delete` (public stays create-only), so
+no secret keys ever reach the browser. To make yourself an admin:
+
+1. Sign up on the site to create your Appwrite user.
+2. In the Appwrite console → **Auth → Teams → Admins → Add member** (or via API), add your user.
+3. Reload `/admin` (also linked from **Account** for admins).
+
 ## Stripe placeholder (intentionally not wired)
 
 The $8/mo Bookmarking tier's checkout is stubbed on purpose:

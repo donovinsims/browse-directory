@@ -32,3 +32,14 @@ export interface Profile {
   email: string | null
   is_pro: boolean
 }
+
+export type SubmissionStatus = 'pending' | 'approved' | 'rejected'
+
+export interface Submission {
+  id: string
+  email: string
+  url: string
+  comment: string
+  status: SubmissionStatus
+  createdAt: string
+}

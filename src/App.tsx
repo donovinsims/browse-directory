@@ -13,6 +13,7 @@ import { Bookmarks } from './pages/Bookmarks'
 import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
 import { Account } from './pages/Account'
+import { Admin } from './pages/Admin'
 import { StartHere } from './pages/StartHere'
 import { NotFound } from './pages/NotFound'
 
@@ -35,6 +36,7 @@ export default function App() {
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/account" element={<Account />} />
+                <Route path="/admin" element={<Admin />} />
                 <Route path="/start-here-delete-later" element={<StartHere />} />
                 <Route path="*" element={<NotFound />} />
               </Route>

@@ -1,13 +1,15 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { usePageMeta } from '../lib/meta'
 import { useAuth } from '../providers/AuthProvider'
+import { useAdmin } from '../lib/useAdmin'
 import { useToast } from '../providers/ToastProvider'
 import { DemoNotice } from '../components/DemoNotice'
 
 export function Account() {
   usePageMeta('Account')
   const { enabled, loading, user, profile, signOut } = useAuth()
+  const { isAdmin } = useAdmin()
   const { toast } = useToast()
   const navigate = useNavigate()
 
@@ -54,15 +56,22 @@ export function Account() {
               )}
             </div>
 
-            <button
-              type="button"
-              className="btn-chrome ring-hairline mt-6"
-              onClick={() => {
-                void signOut().then(() => navigate('/'))
-              }}
-            >
-              Sign out
-            </button>
+            <div className="flex items-center gap-2 mt-6">
+              <button
+                type="button"
+                className="btn-chrome ring-hairline"
+                onClick={() => {
+                  void signOut().then(() => navigate('/'))
+                }}
+              >
+                Sign out
+              </button>
+              {isAdmin && (
+                <Link to="/admin" className="btn-chrome ring-hairline">
+                  Admin · Submissions
+                </Link>
+              )}
+            </div>
           </>
         )}
       </section>
