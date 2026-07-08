@@ -4,6 +4,7 @@ import { useSites } from '../lib/useSites'
 import { usePageMeta } from '../lib/meta'
 import { categories } from '../data/categories'
 import { CategoryFilter } from '../components/CategoryFilter'
+import { SortMenu, type SortKey } from '../components/SortMenu'
 import { SiteGrid } from '../components/SiteGrid'
 import { EmailCapture } from '../components/EmailCapture'
 import { NotFound } from './NotFound'
@@ -12,6 +13,7 @@ export function Gallery() {
   const { slug } = useParams()
   const sites = useSites()
   const [q, setQ] = useState('')
+  const [sort, setSort] = useState<SortKey>('curated')
 
   const category = slug ? categories.find((c) => c.slug === slug) : undefined
 
@@ -19,7 +21,7 @@ export function Gallery() {
     category ? category.name : undefined,
     category
       ? `Hand-picked ${category.name} websites, curated by Browse.`
-      : 'A hand-curated directory of exceptional websites.',
+      : 'A hand-curated directory of exceptional websites across software, design, AI, and more.',
   )
 
   const visible = useMemo(() => {
@@ -32,18 +34,26 @@ export function Gallery() {
           s.name.toLowerCase().includes(needle) ||
           s.categoryLabel.toLowerCase().includes(needle),
       )
+    if (sort === 'az') list = [...list].sort((a, b) => a.name.localeCompare(b.name))
+    else if (sort === 'za') list = [...list].sort((a, b) => b.name.localeCompare(a.name))
     return list
-  }, [sites, category, q])
+  }, [sites, category, q, sort])
 
   if (slug && !category) return <NotFound />
 
+  const countLabel = `${visible.length} ${visible.length === 1 ? 'site' : 'sites'}${
+    category ? ` in ${category.name}` : ''
+  }${q.trim() ? ` matching “${q.trim()}”` : ''}`
+
   return (
     <div className="shell">
-      {/* Hero — centered column */}
+      {/* Hero — centered, value-forward */}
       <section className="pt-16 text-center">
-        <h1 className="type-display mx-auto max-w-[880px]">
-          The Advanced Curation &amp; Directory Template
-        </h1>
+        <h1 className="type-display mx-auto max-w-[880px]">The best-designed sites on the web.</h1>
+        <p className="type-lede text-text-muted mt-5 max-w-[560px] mx-auto">
+          A hand-curated directory across software, design, AI, and more — find your next
+          inspiration, then bookmark what you love.
+        </p>
         <div className="mt-10 flex justify-center">
           <EmailCapture />
         </div>
@@ -53,15 +63,19 @@ export function Gallery() {
       <section className="mt-12 tablet:mt-16">
         <CategoryFilter active={category?.slug} query={q} onQuery={setQ} />
 
-        <div className="mt-6">
-          {visible.length > 0 ? (
-            <SiteGrid sites={visible} />
-          ) : (
-            <p className="type-body text-text-muted py-16 text-center">
-              No sites match “{q}”. Try a different search.
-            </p>
-          )}
+        {/* Result count + sort */}
+        <div className="flex items-center justify-between gap-3 mt-8 mb-5">
+          <p className="type-caption text-text-muted">{countLabel}</p>
+          <SortMenu value={sort} onChange={setSort} />
         </div>
+
+        {visible.length > 0 ? (
+          <SiteGrid sites={visible} />
+        ) : (
+          <p className="type-body text-text-muted py-16 text-center">
+            No sites match “{q}”. Try a different search.
+          </p>
+        )}
 
         <p className="type-caption text-text-muted mt-10 text-center">
           All screenshots are copyrighted by their respective owners.

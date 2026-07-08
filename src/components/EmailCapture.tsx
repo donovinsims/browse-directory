@@ -65,9 +65,13 @@ export function EmailCapture() {
           {state === 'sending' ? 'Joining…' : 'Get Our Weekly Picks'}
         </button>
       </div>
-      {state === 'error' && (
+      {state === 'error' ? (
         <p className="type-caption text-text-primary mt-2 text-center tablet:text-left" role="alert">
           Enter a valid email address.
+        </p>
+      ) : (
+        <p className="type-caption text-text-muted mt-2.5 text-center tablet:text-left">
+          A short weekly email of new standouts. No spam — unsubscribe anytime.
         </p>
       )}
     </form>
