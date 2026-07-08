@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './providers/AuthProvider'
 import { BookmarksProvider } from './providers/BookmarksProvider'
 import { ToastProvider } from './providers/ToastProvider'
@@ -17,31 +17,35 @@ import { Admin } from './pages/Admin'
 import { StartHere } from './pages/StartHere'
 import { NotFound } from './pages/NotFound'
 
+/**
+ * App = providers + route tree, WITHOUT a Router.
+ * The client (main.tsx) wraps this in <BrowserRouter>; the prerenderer
+ * (entry-server.tsx) wraps it in <StaticRouter> — so the same tree renders
+ * on both the browser and at build time for SSG.
+ */
 export default function App() {
   return (
     <ToastProvider>
       <AuthProvider>
         <BookmarksProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route element={<Layout />}>
-                <Route path="/" element={<Gallery />} />
-                <Route path="/category/:slug" element={<Gallery />} />
-                <Route path="/site/:slug" element={<SiteDetail />} />
-                <Route path="/pricing" element={<Pricing />} />
-                <Route path="/submit" element={<Submit />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:slug" element={<BlogPost />} />
-                <Route path="/bookmarks" element={<Bookmarks />} />
-                <Route path="/signin" element={<SignIn />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/account" element={<Account />} />
-                <Route path="/admin" element={<Admin />} />
-                <Route path="/start-here-delete-later" element={<StartHere />} />
-                <Route path="*" element={<NotFound />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Gallery />} />
+              <Route path="/category/:slug" element={<Gallery />} />
+              <Route path="/site/:slug" element={<SiteDetail />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/submit" element={<Submit />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/bookmarks" element={<Bookmarks />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/start-here-delete-later" element={<StartHere />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
         </BookmarksProvider>
       </AuthProvider>
     </ToastProvider>

@@ -34,7 +34,9 @@ function readLocal(): Set<string> {
 
 export function BookmarksProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth()
-  const [bookmarks, setBookmarks] = useState<Set<string>>(() => readLocal())
+  // Start empty so server-render and first client-render match (SSG hydration);
+  // browser-local bookmarks load in the effect below.
+  const [bookmarks, setBookmarks] = useState<Set<string>>(() => new Set())
   // slug -> Appwrite document $id (only populated when signed in)
   const docIds = useRef<Map<string, string>>(new Map())
   const isLocal = !user
